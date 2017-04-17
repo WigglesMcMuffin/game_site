@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     navigate: function(event) {
-      this.$router.push({name: 'game', params: { game_id: this.game.game_id }});
+      this.$router.push({name: 'game', params: { game_id: this.game.id }});
     }
   }
 }

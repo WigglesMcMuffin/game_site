@@ -1,35 +1,23 @@
 var path = require('path')
 var express = require('express')
+var db = require('./db.js')
 var webpack = require('webpack')
 const opn = require('opn')
 var app = express()
+var api = require('./routes/api.js')
+var site = require('./routes/site.js')
 
 var port = process.env.PORT || 3000
 
-app.use('/static', express.static('static'))
+var api_router = api
 
-app.get(/api\/.*/, function(req, res) {
-  console.log('API request received');
-});
+var site_router = site;
 
-app.get(/.*/, function(req, res) {
-  var options = {
-    root: __dirname + '/static/',
-    dotfiles: 'deny',
-    headers: {
-      'x-timestamp': Date.now(),
-      'x-sent': true
-    }
-  };
-  res.sendFile('index.html', options, function(err) {
-    if (err) {
-      console.log(err);
-      res.status(err.status).end();
-    } else {
-      console.log('Sent: index.html');
-    }
-  });
-})
+app.use('/static', express.static('static'));
+
+app.use('/api', api_router);
+
+app.use('/', site_router);
 
 app.listen(port, function () {
   var uri = 'http://localhost:' + port

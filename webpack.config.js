@@ -46,6 +46,8 @@ module.exports = {
     },
     plugins: [
       new webpack.ProvidePlugin({
+				R: 'ramda',
+				$: 'jquery',
         jQuery: 'jquery',
         Vue: 'vue',
         VueRouter: 'vue-router'

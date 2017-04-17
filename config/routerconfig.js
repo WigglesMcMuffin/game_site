@@ -6,6 +6,7 @@ export default [{
 }, {
   path: '/game/:game_id',
   name: 'game',
+	props: true,
   component: (resolve) => {
     require(['../views/game.vue'], resolve)
   }

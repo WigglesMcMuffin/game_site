@@ -1,24 +1,29 @@
 <template>
-  <div>
-    <h1 v-show='games.length > 0'>Games</h1>
-    <div class='ui cards'>
-      <game :game='game' v-for='game in games'></game>
-    </div>
-  </div>
+	<div>
+		<h1 v-show='games.length > 0'>Games</h1>
+		<div class='ui cards'>
+			<game :game='game' v-for='game in games' :key='game.id'></game>
+		</div>
+	</div>
 </template>
 
 <script>
 import game from '../components/game.vue';
 export default {
-  data: function() {
-    return {
-      games: [
-       {name: 'Mario Clone', description: 'A basic mario clone game', game_id: 1},
-      ]
-    }
-  },
-  components: {
-    game,
-  }
+	mounted: function() {
+		console.log('Mounted')
+		console.log('Requesting ajax call now')
+		$.get('api/game', (data) => {
+			this.games = data;
+		});
+	},
+	data: function() {
+		return {
+			games: []
+		}
+	},
+	components: {
+		game,
+	}
 }
 </script>

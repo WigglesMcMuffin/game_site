@@ -1,2 +1,6 @@
 *.swp
 node_modules
+semantic
+semantic.json
+.ruby-version
+*bundle.js
